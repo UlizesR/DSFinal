@@ -1,7 +1,3 @@
-# Uli Raudales — Data Science Page
-
----
-
 ## Data Sources and Project Ideas
 
 Below are five real-world datasets I am considering for my final project, along with short descriptions and ideas for exploring each one. Many of these ideas involve simple applications of Topological Data Analysis (TDA).
