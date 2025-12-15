@@ -1,83 +1,123 @@
 # Comparing Weather, CO₂, and Climate Topology of Rome and Chicago
 
 ## Authors
-- Yinqi Wang  
-- Uli Rodriguez  
+
+* Yinqi Wang
+* Uli Rodriguez
 
 ## Colab Notebook
-[Download the Colab notebook](./notebook/project_colab.ipynb)
+
+[Download the Colab notebook](HW6.ipynb)
 
 ---
 
 ## Introduction
-This project compares weather patterns, atmospheric CO₂ trends, and climate structure for two cities located at similar latitudes: **Rome, Italy** and **Chicago, USA** (approximately 41°N). Despite their similar latitude, the two cities experience markedly different climates due to geographical and atmospheric factors.
 
-We analyze temperature, precipitation, and atmospheric CO₂ data to address the following hypothesis:
+This project compares weather patterns, atmospheric CO₂ trends, and climate structure for two cities located at similar latitudes: **Rome, Italy** and **Chicago, USA** (approximately 41°N). Although latitude strongly influences climate, it does not fully determine local weather conditions. Geographic factors such as proximity to oceans, prevailing winds, and continentality play a critical role in shaping temperature and precipitation patterns.
+
+We analyze daily temperature, precipitation frequency, atmospheric CO₂ concentration, and monthly climate structure to investigate how geography influences short-term weather, long-term climate trends, and seasonal stability.
 
 > **Hypothesis:** Because Rome is close to the Mediterranean Sea, it is warmer than Chicago, and the colder city experiences more precipitation.
 
 ---
 
-## Weather Analysis: Methods & Results
-Daily temperature and precipitation data for **Chicago** were obtained from NOAA for the period **January 1, 2025 to July 1, 2025**. Corresponding data for **Rome** were obtained from Visual Crossing.
+## Weather Analysis: Temperature
 
-The results show that Rome consistently has higher temperatures than Chicago, supporting our hypothesis. During winter (January–March), Chicago frequently experiences temperatures below 0 °C, reaching nearly –20 °C at times, while Rome remains relatively mild, typically between 5–10 °C. In spring, both cities warm significantly, but Chicago experiences more dramatic temperature swings, while Rome warms steadily from approximately 13 °C to 30 °C.
+### Daily Temperature Trends (Jan–Jul 2025)
 
-Although both cities lie at similar latitudes, their climates differ substantially. Rome’s proximity to the Mediterranean Sea moderates temperature fluctuations due to the sea’s high heat capacity, while Chicago’s continental climate leads to sharper seasonal contrasts.
+The figure below compares daily average temperatures in Chicago and Rome.
 
-### Precipitation Patterns
-Rome experiences significantly more rainy days than Chicago from January through May, averaging 15–21 rainy days per month compared to Chicago’s 6–13. However, in June, Rome becomes drier (7 rainy days) while Chicago experiences increased rainfall (10 rainy days).
+![Daily Temperature Comparison](output8.png)
 
-This finding partially contradicts our original hypothesis. Rome’s Mediterranean climate brings wetter winters and springs, whereas Chicago’s continental climate results in colder, drier winters and increased summer precipitation driven by convective storms.
+Rome consistently exhibits higher temperatures than Chicago throughout the observation period. During winter months (January–March), Chicago frequently experiences temperatures below 0 °C, occasionally reaching nearly –20 °C, while Rome remains relatively mild, typically between 5–10 °C. This difference highlights the moderating influence of the Mediterranean Sea on Rome’s climate.
 
----
-
-## Weather Conclusion
-Rome is warmer than Chicago during winter and spring, consistent with Mediterranean climate influences. However, Rome becomes drier in summer, while Chicago experiences increased rainfall. These differences highlight the role of geography and atmospheric circulation in shaping local climate.
+As spring progresses, both cities experience rising temperatures; however, Chicago’s warming is much more abrupt. Daily temperatures in Chicago increase rapidly from near-freezing conditions to above 20 °C, whereas Rome warms more gradually. This behavior is characteristic of continental climates, where land surfaces heat and cool quickly compared to maritime environments.
 
 ---
 
-## CO₂ Trends: Methods & Results
-Atmospheric CO₂ concentrations were analyzed using the **Mauna Loa Observatory dataset (1958–2025)**. After converting year and month data into timestamps, both long-term and short-term trends were examined.
+## Weather Analysis: Precipitation
 
-The data reveal a clear long-term increase in CO₂ levels, rising from approximately **315 ppm in 1958** to over **425 ppm in 2025**, reflecting anthropogenic greenhouse gas emissions. Seasonal oscillations are also evident, with CO₂ peaking in late winter and declining in summer due to increased photosynthesis.
+### Monthly Rainy Days (Jan–Jun 2025)
+
+The figure below shows the number of rainy days per month in each city.
+
+![Monthly Rainy Days](output7.png)
+
+Rome experiences significantly more rainy days than Chicago from January through May, averaging approximately 15–21 rainy days per month compared to Chicago’s 6–13. This pattern reflects the Mediterranean climate, where winter and early spring precipitation is common due to mid-latitude cyclones.
+
+In June, however, this pattern reverses. Rome becomes substantially drier, while Chicago experiences increased rainfall. This shift is driven by strong summer convection in the Midwestern United States, which leads to frequent thunderstorms. This result contradicts our initial hypothesis and demonstrates that precipitation patterns depend not only on temperature but also on atmospheric circulation and seasonal dynamics.
 
 ---
 
-## CO₂ Comparison With Temperature
-CO₂ data from **January–July 2025** were compared with temperature data for Rome and Chicago over the same period. While daily temperatures vary widely (–15 °C to 30 °C), CO₂ levels fluctuate only slightly within a narrow ~5 ppm range.
+## CO₂ vs Temperature Comparison (2025)
 
-This demonstrates that short-term CO₂ variations do not directly influence daily or weekly weather. Instead, local temperature is governed by regional climate, geography, and atmospheric dynamics. CO₂ impacts climate on long time scales (decades), not short-term weather variability.
+### CO₂ During Temperature Observation Period
 
----
+The figure below shows CO₂ levels during the same period as the temperature data.
 
-## CO₂ Conclusion
-Although global CO₂ levels continue to rise and contribute to long-term climate warming, they do not explain short-term temperature differences between individual cities. Long-term datasets are required to detect climate-scale relationships between CO₂ and temperature.
+![CO2 2025 Trend](output6.png)
+
+Atmospheric CO₂ concentrations change very gradually over the January–July 2025 period, increasing slightly through spring and declining modestly in summer. In contrast, daily temperatures in both Rome and Chicago fluctuate dramatically over short time scales.
+
+This comparison demonstrates that short-term temperature variability is not driven by short-term CO₂ fluctuations. Instead, temperature differences between the two cities are dominated by local geography, air mass movement, and seasonal cycles. CO₂ influences climate on long time scales (decades), not daily or weekly weather patterns .
 
 ---
 
 ## Topological Data Analysis (TDA)
 
 ### Motivation
-While traditional statistical methods capture averages and trends, they may fail to reveal the underlying *shape* of climate dynamics. To address this, we applied **Topological Data Analysis (TDA)** to monthly temperature data for Rome and Chicago using Meteostat.
 
-### Methods
-Monthly average temperature data (2000–2025) were standardized and analyzed using:
-- **Time-delay embeddings (m = 3, τ = 1)** to capture month-to-month dynamics
-- **12-month sliding window embeddings** to capture annual climate structure
+While traditional statistical methods summarize averages and trends, they do not capture the *shape* of climate dynamics. To better understand seasonal structure and stability, we applied **Topological Data Analysis (TDA)** to monthly temperature data from Meteostat.
 
-Persistent homology was computed, with focus on **H₁ features**, which correspond to loop-like structures associated with seasonal cycles.
+TDA allows us to detect recurring geometric patterns, such as loops, which correspond to periodic behavior like annual seasonality.
 
-### TDA Results
-In the time-delay embedding, both cities exhibit persistent H₁ features corresponding to annual seasonality. However, **Rome shows a stronger dominant loop** (maximum persistence **0.9529**) compared to **Chicago (0.7796)**, indicating more stable month-to-month temperature dynamics.
+---
 
-The sliding window embedding further highlights climatic differences. Rome exhibits a highly persistent annual loop (maximum persistence **3.4849**) with fewer competing features, while Chicago shows a larger number of H₁ features and greater total persistence, reflecting stronger interannual variability.
+### Time-Delay Embedding (m = 3, τ = 1)
 
-### TDA Conclusion
-Topological analysis reveals that Rome’s climate exhibits greater seasonal stability, while Chicago’s climate is more variable across both monthly and yearly scales. These findings align with the known Mediterranean climate of Rome and the continental climate of Chicago.
+**Chicago**
+![Chicago Delay Embedding](output.png)
+
+**Rome**
+![Rome Delay Embedding](output1.png)
+
+In the time-delay embedding, each point represents temperature at three consecutive months. Both cities form loop-like structures, indicating strong annual seasonality. However, Chicago’s loop is wider and more scattered, reflecting strong month-to-month variability.
+
+Rome’s loop is tighter and smoother, indicating more stable transitions between seasons. This difference reflects the moderating influence of the Mediterranean Sea, which reduces temperature volatility throughout the year.
+
+---
+
+### Persistence Diagrams (Delay Embedding)
+
+**Chicago**
+![Chicago Persistence Diagram](output2.png)
+
+**Rome**
+![Rome Persistence Diagram](output3.png)
+
+Persistence diagrams quantify the strength of topological features. Rome exhibits a stronger dominant H₁ feature (maximum persistence 0.9529) compared to Chicago (0.7796). This indicates that Rome’s seasonal cycle is more coherent and less affected by noise, while Chicago’s seasonality is fragmented by abrupt temperature changes.
+
+---
+
+### 12-Month Sliding Window Embedding
+
+**Chicago**
+![Chicago Sliding Window PD](output4.png)
+
+**Rome**
+![Rome Sliding Window PD](output5.png)
+
+The sliding window embedding captures full-year temperature patterns. Rome exhibits a highly persistent annual loop (maximum persistence 3.4849), indicating that its yearly temperature structure is consistent across years. Chicago, by contrast, shows a larger number of competing H₁ features, reflecting strong interannual variability and less predictable seasonal behavior.
+
+---
+
+## TDA Conclusion
+
+Topological analysis reveals that while both Rome and Chicago exhibit strong seasonal cycles, Rome’s climate is significantly more stable across both monthly and yearly time scales. Chicago’s continental climate leads to greater variability, sharper seasonal transitions, and less consistent annual patterns. These findings align with established climatological differences between Mediterranean and continental environments .
 
 ---
 
 ## References
-- *Chicago, IL, US Climate Data (GHCN-Daily).* NOAA National Centers for Environmental Information, 2025. Climate Data Online (CDO).
-- *Rome Climate and Weather Data.* Meteostat, 2025. Rome | Weather History & Climate.
+
+* *Chicago, IL, US Climate Data (GHCN-Daily).* NOAA National Centers for Environmental Information, 2025.
+* *Rome Climate and Weather Data.* Meteostat, 2025.
